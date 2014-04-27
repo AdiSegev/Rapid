@@ -1,0 +1,1 @@
+var data ='{"name":"John Johnson","street":"Oslo West 555","age":33}';

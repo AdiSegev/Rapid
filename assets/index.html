@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>title</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no"
+	charset=UTF-8>
+<meta http-equiv="Content-Type" content="text-html" charset=UTF-8 />
+<script src="lib/jquery-1.9.1.js"></script>
+<script src="strings.js"></script>
+<script src="strings.json"></script>
+<script src="lib/main.js"></script>
+<script src="lib/ClientsList.js"></script>
+<script src="lib/courseList.js"></script>
+<script src="lib/jquery.mobile-1.3.2.js"></script>
+<script src="lib/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="lib/jquery.ui.touch-punch.min.js"></script>
+<script src="lib/RGraph.common.core.js"></script>
+<script src="lib/RGraph.thermometer.js"></script>
+
+
+<!-- <link href="src/css/jquery.mobile.theme-1.1.0.css" rel="stylesheet"> -->
+<link rel="stylesheet" href="src/css/rapid-css.css" />
+<link rel="stylesheet" href="src/css/jquery.mobile-1.3.2.css" />
+<link href="src/css/jqm-icon-pack-2.0-original.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Login Page -->
+
+	<div data-role="page" id="login" data-title="Tnuva" data-theme="f">
+		<div data-role="content">
+			<div id = "loginDiv">
+				<label>הזן קוד נהג</label>
+				<input class ="inputField" type="number" id="driverIdInput">
+			<div align = "center">
+				<a data-role="button" id="submitDriverIdInput" data-inline="true">אישור</a>
+			</div>
+			
+			</div>
+
+			<!-- User Id denied Popup -->
+			<div data-role="popup" id="userDeniedDialog" data-transition="flip">
+				<a href="#" data-rel="back" data-role="button" data-theme="f"
+					data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div data-role="header" data-theme="f">
+					<h1 id="dialogHeaderText"></h1>
+				</div>
+				<div data-role="content">
+					<div class="div-widget" align="center">
+						<h4 id="dialogContentText"></h4>
+					</div>
+					<a data-role="button" id="confirmUserIdDeniedButton" data-theme="f"
+						data-inline="true">אישור</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Settings Page -->
+
+	<div data-role="dialog" id="settings" data-title="Settings"
+		data-theme="f">
+		<div data-role="header">
+			<h1>Dialog</h1>
+		</div>
+		<div data-role="content">
+			<div class="ui-grid-b">
+				<div class="ui-block-a">
+					<button type="button" data-theme="f">Previous</button>
+				</div>
+				<div class="ui-block-b">
+					<button type="button" data-theme="f">Next</button>
+				</div>
+				<div class="ui-block-c">
+					<button type="button" data-theme="f">Next</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+	<!-- Drive Purpose Selection Page -->
+	<div data-role="page" id="driveStatusSelectionScreen"
+		data-title="Tnuva" data-theme="f">
+
+		<div data-role="content">
+
+			<div class="ui-grid-d">
+				<div class="ui-block-a">
+					<button type="button" data-theme="f" data-corners="false">Settings</button>
+				</div>
+				<div class="ui-block-c settingsButton">
+					<button type="button" data-theme="f" data-corners="false">Driver
+						Id</button>
+				</div>
+				<div class="ui-block-b settingsButton">
+					<button type="button" data-theme="f" data-corners="false">Drive
+						status</button>
+				</div>
+				<div class="ui-block-c settingsButton">
+					<button type="button" data-theme="f" data-corners="false">Course
+						Status</button>
+				</div>
+				<div class="ui-block-c settingsButton">
+					<button type="button" data-theme="f" data-corners="false">Action</button>
+				</div>
+			</div>
+
+
+			<div style="text-align: center; padding-top: 2em;">
+				<img id="distributeButton" src="src/css/images/truck.jpg"
+					style="margin: 0 10px;"> 
+					<img id="administrativeDriveButton"	src="src/css/images/managerCar.jpg" style="margin: 0 10px;">
+			</div>
+		</div>
+
+
+	</div>
+
+	<!-- Course Selection Page -->
+
+	<div data-role="page" id="courseSelectionScreen" data-theme="f">
+
+		<div data-role="content">
+		<ul data-role="listview" id="courselist">
+			</ul>
+		
+		<div id = "newCourse">
+				<label>הקלד מסלול אחר</label>
+				<input class ="inputField" type="number" id="newCourseInput">
+			<div align = "center">
+				<a data-role="button" id="newCourseButton" data-inline="true">חפש</a>
+			</div>
+		</div>
+		
+		<!-- Course denied Popup -->
+			<div data-role="popup" id="courseDeniedDialog" data-transition="flip">
+				<a href="#" data-rel="back" data-role="button" data-theme="f"
+					data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div data-role="header" data-theme="f">
+					<h1 id="coursedialogHeaderText"></h1>
+				</div>
+				<div data-role="content">
+					<div class="div-widget" align="center">
+						<h4 id="coursedialogContentText"></h4>
+					</div>
+					<a data-role="button" id="confirmCourseDeniedButton" data-theme="f"
+						data-inline="true">אישור</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Administrative Drive Page -->
+
+	<div data-role="page" id="administrativeDriveScreen"
+		data-title="Administative Drive" data-theme="f">
+		<div data-role="header" data-theme="f">
+					<h1 id="administrativeDriveHeader">נסיעה מנהלתית</h1>
+				</div>
+		<div data-role="content">
+		<div style= "text-align:center; margin-top:10% !important;">
+							<img src="src/css/images/managerCar.jpg" style="margin: 0 10px;">
+		</div>
+		<div align="center">
+			<a data-role="button" id="endAdmindrive" data-inline="true"
+				>סיים נסיעה מנהלתית</a>
+		</div>
+			<canvas id="cvs" width="75" height="200">
+			[No canvas support]
+		</canvas>
+		</div>
+
+		<div align="center">
+			<a data-role="button" id="changeTemp" data-inline="true">אישור</a>
+		</div>
+	</div>
+	
+	
+	<div data-role="dialog" id="newCourseScreen">
+		<div data-role="content">
+			<form action="http://" method="POST">
+				<div data-role="fieldcontain">
+					<label for="newCourseId"></label> <input type="text"
+						id="newCourseId" placeholder="Enter new course Id">
+				</div>
+				<a data-role="button" id="newCourseIdButton"
+					href="#clientsListScreen">Submit</a>
+			</form>
+		</div>
+	</div>
+
+	<!-- Clients List Page -->
+
+	<div data-role="page" id="clientsListScreen" data-theme="f"
+		data-dividertheme="b">
+		<div data-role="content">
+			<ul data-role="listview" data-split-icon="arrow-r"
+				data-split-theme="b" id="testlist">
+			</ul>
+
+			<!-- Confirm client accomplished Dialog -->
+			<div data-role="popup" id="clientCompleteDialog" data-transition="flip">
+				<a href="#" data-rel="back" data-role="button" data-theme="f"
+					data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div data-role="header" data-theme="f">
+					<h1 id="dialogHeaderText">הוספת מיקום לקוח</h1>
+				</div>
+				<div data-role="content">
+					<div class="div-widget" align="center">
+						<h4 id="dialogContentText">מיקום מכולת בוריס התבצע בהצלחה</h4>
+					</div>
+					<a data-role="button" id="confirmClientComplete" data-theme="f"
+						data-inline="true">אישור</a>
+					<div class="div-widget">
+						<h5 id="testme">
+							החלון ייסגר בעוד <span id="clientCompleteCounter"></span> שניות
+						</h5>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Update client location Dialog -->
+			<div data-role="popup" id="updateClientDialog" data-transition="flip">
+				<a href="#" data-rel="back" data-role="button" data-theme="f"
+					data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div data-role="header" data-theme="f">
+					<h1 id="dialogHeaderText">הוספת מיקום לקוח</h1>
+				</div>
+				<div data-role="content">
+					<div class="div-widget" align="center">
+						<h4 id="dialogContentText">התחנה סומנה כבוצעה.</h4>
+						<h4 id="dialogContentText">מיקום מכולת בוריס התבצע בהצלחה</h4>
+					</div>
+					<a data-role="button" id="confirm" data-theme="f"
+						data-inline="true">אישור</a>
+					<div class="div-widget">
+						<h5>
+							החלון ייסגר בעוד <span id="counter"></span> שניות
+						</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+		var clicked = false;
+
+		$('#test').click(function() {
+			if (clicked === false) {
+				$(this).addClass('ui-disabled');
+				clicked = true;
+				alert('Button is now disabled');
+			} else {
+				$('#test').removeClass('ui-disabled');
+				clicked = false;
+				alert('Button is now enable');
+			}
+		});
+
+		var driverId = $("li[value='driverIdTab']"), driverInputId;
+		
+		var jsonResult;
+		function androidCallBack(action, message) {
+
+			console.log('action ' +message);
+			switch (action) {
+			
+			
+			case "driverAuthentication":
+				handleDriverAuthentication(message);
+				break;
+			case "tempChanged":
+				tempChanged(message);
+				break;
+			case "clientsList":
+				
+				$.mobile.hidePageLoadingMsg();
+				jsonResult = "";
+				jsonResult = JSON.parse(message);
+				generateClientsList(jsonResult);
+				break;
+			case "coursesList":
+				console.log("got courselist " + message );
+				$.mobile.hidePageLoadingMsg();
+				
+				jsonResult = JSON.parse(message);
+				
+				generateCourseList(jsonResult);
+				break;
+			case "courseDenied":
+				courseDenied();
+			
+			}
+
+		}
+	</script>
+</body>
+
+</html>
+
